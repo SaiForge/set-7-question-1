@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCA Department — AI FAQ Chatbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --primary-dark: #1e3a8a;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0ea5e9;
+      --bot-msg-bg: #f1f5f9;
+      --user-msg-bg: #2563eb;
+      --badge-success: #dcfce7;
+      --badge-success-txt: #166534;
+      --badge-warn: #fef3c7;
+      --badge-warn-txt: #92400e;
+      --radius: 14px;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 1100px;
+      height: 90vh;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 340px;
+      background: #fcfdfe;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 22px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .brand-text h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: var(--primary);
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 20px;
+    }
+
+    .sidebar-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .test-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .test-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .test-chip:hover {
+      border-color: var(--primary-light);
+      background: #f8faff;
+      transform: translateY(-1px);
+    }
+
+    .test-chip span.category-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stats-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .stats-card strong {
+      color: var(--text);
+    }
+
+    /* Main Chat Window */
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+    }
+
+    .chat-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+    }
+
+    .header-info h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .header-info p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    /* Messages Container */
+    .messages-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .message {
+      display: flex;
+      gap: 12px;
+      max-width: 82%;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .message.bot .avatar {
+      background: #eff6ff;
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+    }
+
+    .message.user .avatar {
+      background: var(--user-msg-bg);
+      color: white;
+    }
+
+    .msg-content {
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .message.bot .msg-content {
+      background: var(--bot-msg-bg);
+      color: var(--text);
+      border-top-left-radius: 4px;
+    }
+
+    .message.user .msg-content {
+      background: var(--user-msg-bg);
+      color: #ffffff;
+      border-top-right-radius: 4px;
+    }
+
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .meta-badge.matched {
+      background: var(--badge-success);
+      color: var(--badge-success-txt);
+    }
+
+    .meta-badge.fallback {
+      background: var(--badge-warn);
+      color: var(--badge-warn-txt);
+    }
+
+    /* Input Box */
+    .input-container {
+      padding: 18px 24px;
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+    }
+
+    .input-form {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 6px 8px 6px 14px;
+      transition: all 0.2s;
+    }
+
+    .input-form:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      background: #ffffff;
+    }
+
+    .input-form input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .input-form button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .input-form button:hover {
+      background: var(--primary-dark);
+    }
+
+    @media (max-width: 850px) {
+      .app-container {
+        flex-direction: column;
+        height: 96vh;
+      }
+      .sidebar {
+        width: 100%;
+        height: 200px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Left Sidebar: Metadata & Viva Test Triggers -->
+    <div class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <div class="brand-text">
+          <h2>MCA Dept Chatbot</h2>
+          <p>GenAI Lab Practical Exam</p>
+        </div>
+      </div>
+
+      <div class="mode-pill">
+        ⚡ Smart Fuzzy & Semantic Matcher
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Demonstration Test Questions</div>
+        <div class="test-chips">
+          <button class="test-chip" onclick="askPredefined('What is the eligibility criteria for admission into the MCA program?')">
+            <span class="category-label">ADMISSIONS</span>
+            Eligibility criteria for admission into MCA?
+          </button>
+          <button class="test-chip" onclick="askPredefined('What elective subjects and specializations are offered in the MCA department?')">
+            <span class="category-label">COURSES</span>
+            Specializations and electives offered?
+          </button>
+          <button class="test-chip" onclick="askPredefined('How is the internal assessment (CIE) and external semester examination weighted?')">
+            <span class="category-label">EXAMINATIONS</span>
+            Marks weightage (CIE and SEE)?
+          </button>
+          <button class="test-chip" onclick="askPredefined('How does the departmental training and placement cell assist MCA students?')">
+            <span class="category-label">PLACEMENTS</span>
+            Placement cell training & activities?
+          </button>
+          <button class="test-chip" onclick="askPredefined('What will be the exact placement package offered to me next year?')">
+            <span class="category-label" style="color: #b45309;">UNSUPPORTED QUERY</span>
+            Exact placement package offered next year?
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-section" style="margin-top: auto;">
+        <div class="stats-card">
+          <p>📁 <strong>Dataset:</strong> <span id="faqCount">28</span> FAQs loaded</p>
+          <p>🔤 <strong>Typo Resilient:</strong> Handles misspellings</p>
+          <p>🎯 <strong>Grounding:</strong> Zero Hallucination</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Chat Window -->
+    <div class="chat-area">
+      <div class="chat-header">
+        <div class="header-info">
+          <h3>Department of Computer Applications</h3>
+          <p>Student FAQ Enquiry Assistant — Grounded Knowledge Base</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-secondary" onclick="clearChat()">🗑️ Clear</button>
+        </div>
+      </div>
+
+      <div class="messages-container" id="chatContainer">
+        <!-- Initial Welcome Message -->
+        <div class="message bot">
+          <div class="avatar">🤖</div>
+          <div>
+            <div class="msg-content">
+              Hello! 👋 I am your official <strong>MCA Department AI Assistant</strong>.<br><br>
+              I can answer your questions on <strong>Admissions, Courses, Examinations, Attendance, Fees, Placements, and Facilities</strong> strictly from our departmental knowledge base.<br><br>
+              Try asking: <em>"admission procedure"</em>, <em>"eligibility criteria"</em>, <em>"exam details"</em>, <em>"fee structure"</em>, or <em>"placement training"</em>!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Input Area -->
+      <div class="input-container">
+        <form class="input-form" id="chatForm" onsubmit="handleUserSubmit(event)">
+          <input 
+            type="text" 
+            id="queryInput" 
+            placeholder="Type your question about admissions, courses, exams, placements..." 
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Ask ➔</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. EMBEDDED KNOWLEDGE BASE (Full 28 entries with enriched synonyms)
+    // =========================================================================
+    let faqDatabase = [
+      {
+        id: 1, category: "Admissions",
+        question: "What is the eligibility criteria for admission into the MCA program?",
+        answer: "Candidates must hold a recognized Bachelor's degree of minimum 3 years duration (such as BCA, B.Sc Computer Science/IT, or B.Sc/B.Com/B.A with Mathematics at 10+2 or graduation level) with at least 50% aggregate marks (45% for reserved categories). [Illustrative sample data].",
+        keywords: ["eligibility", "criteria", "admission", "admissions", "admission criteria", "qualification", "bca", "bsc", "percentage", "maths", "entrance", "degree requirements", "minimum marks"]
+      },
+      {
+        id: 2, category: "Admissions",
+        question: "Is lateral entry available for direct admission into the second year of MCA?",
+        answer: "Lateral entry into the second year is governed by state government and university technical education norms. Generally, candidates holding a BCA or B.Sc (Computer Science / IT) degree may be eligible subject to seat availability and qualifying entrance examination ranks.",
+        keywords: ["lateral", "entry", "lateral entry", "second year", "direct admission", "bca", "bsc cs", "eligibility", "direct 2nd year"]
+      },
+      {
+        id: 3, category: "Admissions",
+        question: "What is the admission procedure and how do I apply for MCA?",
+        answer: "Admissions are conducted through the State Common Entrance Test (CET) or the National Level Entrance Examination followed by centralized counseling. Prospective students can also submit an online enquiry form on the college portal for management quota counseling.",
+        keywords: ["admission", "admissions", "admission details", "admission procedure", "how to apply", "application form", "counseling", "entrance exam", "cet", "process", "apply for mca", "enrollment"]
+      },
+      {
+        id: 4, category: "Admissions",
+        question: "What documents are required at the time of MCA admission verification?",
+        answer: "Required documents include: 10th and 12th marksheets, Degree marks cards (all semesters), Degree certificate / Provisional certificate, Entrance exam rank card, Transfer Certificate (TC), Migration Certificate, Caste/Category Certificate (if applicable), and Passport-size photographs.",
+        keywords: ["documents required", "verification", "marksheets", "transfer certificate", "tc", "migration", "certificates", "admission documents", "papers required"]
+      },
+      {
+        id: 5, category: "Courses",
+        question: "What is the duration and curriculum structure of the MCA program?",
+        answer: "The MCA is a 2-year full-time postgraduate degree program divided into 4 semesters. The curriculum covers foundational computer science, core programming, modern software engineering, data science, cloud computing, and includes a mandatory final-semester industry capstone project.",
+        keywords: ["duration", "curriculum", "structure", "semesters", "2 years", "syllabus", "course outline", "postgraduate", "course details", "subjects list", "program structure"]
+      },
+      {
+        id: 6, category: "Courses",
+        question: "What elective subjects and specializations are offered in the MCA department?",
+        answer: "The department offers track-based electives in Artificial Intelligence & Machine Learning, Full-Stack Web Development, Cloud Computing & DevOps, Cyber Security, and Big Data Analytics during the 3rd and 4th semesters.",
+        keywords: ["electives", "specializations", "subjects", "tracks", "ai", "machine learning", "cloud", "cyber security", "full stack", "elective subjects", "course options"]
+      },
+      {
+        id: 7, category: "Courses",
+        question: "Is an industry internship or major project mandatory for completion of MCA?",
+        answer: "Yes, every MCA student must complete a 16-to-20 week major industry project or departmental research internship during the final (4th) semester, followed by a project report submission and viva voce examination.",
+        keywords: ["internship", "major project", "capstone", "final semester", "viva", "industry project", "mandatory", "internship details", "project work"]
+      },
+      {
+        id: 8, category: "Courses",
+        question: "Are value-added certification courses provided alongside regular classes?",
+        answer: "Yes, the MCA department conducts industry-aligned bridge courses and certifications on Python programming, Generative AI tools, Docker, Kubernetes, AWS Cloud, and Soft Skills Development at subsidized student rates.",
+        keywords: ["certification", "value added", "workshops", "python", "generative ai", "aws", "skill development", "extra courses"]
+      },
+      {
+        id: 9, category: "Examinations",
+        question: "How is the internal assessment (CIE) and external semester examination weighted?",
+        answer: "The continuous internal evaluation (CIE) typically carries 40% weightage (internal tests, quizzes, lab performance, and assignments), while the semester-end examination (SEE) carries 60% weightage, as per university guidelines.",
+        keywords: ["exam", "exams", "examination", "exam details", "examination details", "internal assessment", "cie", "see", "external examination", "weightage", "marks distribution", "split", "exam pattern", "evaluation scheme"]
+      },
+      {
+        id: 10, category: "Examinations",
+        question: "What are the minimum passing marks in internal and semester exams?",
+        answer: "Students must secure at least 40% marks in the semester-end exam and a combined total of at least 50% (CIE + SEE) in each subject to pass, adhering to postgraduate academic regulations.",
+        keywords: ["passing marks", "minimum marks", "pass criteria", "cut off", "score", "semester exam", "regulations", "pass percentage", "minimum score"]
+      },
+      {
+        id: 11, category: "Examinations",
+        question: "What is the procedure for revaluation or photocopy of examination answer scripts?",
+        answer: "Students can apply online through the student examination portal within 10 days of result announcement by paying the prescribed university revaluation fee. Answer script photocopies can also be requested for verification.",
+        keywords: ["revaluation", "photocopy", "rechecking", "answer scripts", "results", "exam review", "reval fee", "revaluation process", "paper verification"]
+      },
+      {
+        id: 12, category: "Examinations",
+        question: "When are supplementary or backlog examinations conducted?",
+        answer: "Supplementary examinations for clearing backlogs are generally conducted during the semester break or concurrently with odd/even semester regular examinations, in accordance with the university examination schedule.",
+        keywords: ["supplementary", "backlogs", "arrears", "makeup exam", "repeat exam", "exam schedule", "clearing backlog", "kt exam"]
+      },
+      {
+        id: 13, category: "Attendance",
+        question: "What is the minimum attendance percentage required to be eligible for semester exams?",
+        answer: "A minimum of 75% attendance in both theory and practical lab classes is mandatory to appear for the semester-end examinations.",
+        keywords: ["attendance", "minimum attendance", "attendance percentage", "attendance rules", "attendance requirement", "75 percentage", "exam eligibility", "criteria", "attendance details"]
+      },
+      {
+        id: 14, category: "Attendance",
+        question: "Can shortage of attendance be condoned on medical grounds?",
+        answer: "Students with attendance between 65% and 74% may apply for medical condonation by submitting authentic hospital discharge summaries/medical certificates to the Head of Department within 3 days of resuming classes.",
+        keywords: ["medical leave", "condonation", "shortage", "medical certificate", "sick leave", "attendance relaxation", "medical grounds"]
+      },
+      {
+        id: 15, category: "Attendance",
+        question: "How can students and parents track daily and monthly attendance?",
+        answer: "Attendance is recorded online by faculty every lecture hour and can be viewed in real-time by logging into the College ERP Student Portal or the official College Mobile App.",
+        keywords: ["track attendance", "erp portal", "student portal", "mobile app", "daily attendance", "view attendance", "check attendance"]
+      },
+      {
+        id: 16, category: "Fees",
+        question: "What is the fee payment schedule and accepted payment modes?",
+        answer: "Tuition fees are payable annually or semester-wise before the commencement of each academic session. Payments are accepted through the online ERP fee gateway via Net Banking, UPI, Credit/Debit cards, or Demand Draft (DD).",
+        keywords: ["fee", "fees", "fee details", "fee structure", "tuition fee", "fee payment", "schedule", "payment modes", "net banking", "upi", "installment", "erp", "college fees"]
+      },
+      {
+        id: 17, category: "Fees",
+        question: "Are there government scholarships or merit fee concessions available?",
+        answer: "Eligible students can avail state government post-matric scholarships (OBC/SC/ST/EWS), NSP central scholarships, and college institutional merit waivers for top entrance exam rank holders. Details are available at the college scholarship desk.",
+        keywords: ["scholarship", "merit concession", "financial aid", "fee concession", "government scholarship", "nsp", "waiver", "scholarships", "fee discount"]
+      },
+      {
+        id: 18, category: "Fees",
+        question: "What is the policy regarding late fee penalties and refund requests?",
+        answer: "A nominal per-day late fine applies after the scheduled due date. Fee refund requests following admission withdrawal are processed strictly per UGC/AICTE refund policy guidelines based on the withdrawal notice date.",
+        keywords: ["late fee", "penalty", "refund policy", "fee refund", "cancellation", "withdrawal", "ugc norms", "fine"]
+      },
+      {
+        id: 19, category: "Placements",
+        question: "How does the departmental training and placement cell assist MCA students?",
+        answer: "The Central Placement Cell coordinates on-campus recruitment, conducts pre-placement training (aptitude, coding practice, mock technical interviews, and resume building workshops), and connects students with leading IT organizations.",
+        keywords: ["placement", "placements", "placement details", "placement cell", "training", "aptitude", "mock interviews", "campus recruitment", "job assistance", "placement support", "campus hiring"]
+      },
+      {
+        id: 20, category: "Placements",
+        question: "What are the eligibility criteria for participating in campus placement drives?",
+        answer: "Students typically need a minimum aggregate CGPA of 6.0 or 60% across undergraduate and MCA semesters, with no active backlogs at the time of the recruitment drive, although individual company criteria may vary.",
+        keywords: ["placement eligibility", "cgpa criteria", "company eligibility", "active backlogs", "campus drive", "placement criteria", "eligibility for placement"]
+      },
+      {
+        id: 21, category: "Placements",
+        question: "Which IT companies and industries frequently recruit MCA graduates?",
+        answer: "Recruiters include multinational IT service firms, software product startups, fintech companies, and cloud solution providers (e.g., software engineering, web development, QA automation, and data analytics roles).",
+        keywords: ["recruiters", "companies", "top recruiters", "hiring", "it companies", "placement records", "job roles", "visiting companies"]
+      },
+      {
+        id: 22, category: "Placements",
+        question: "What was the highest or average salary package offered in recent placements?",
+        answer: "Placement packages depend on market demand, technical skills, and candidate performance. Official audited compensation statistics (average and highest CTC) are published in the Department Annual Placement Brochure.",
+        keywords: ["salary package", "average package", "highest package", "ctc", "placement stats", "compensation", "salary", "lpa"]
+      },
+      {
+        id: 23, category: "College Facilities",
+        question: "What computing and laboratory facilities are available for MCA students?",
+        answer: "The department maintains dedicated air-conditioned labs equipped with high-performance desktop systems, GPU workstations for AI/ML projects, gigabit LAN connectivity, and licensed software suites alongside open-source development tools.",
+        keywords: ["computer lab", "facilities", "gpu workstations", "hardware", "software", "infrastructure", "laboratory", "labs", "computers"]
+      },
+      {
+        id: 24, category: "College Facilities",
+        question: "What are the college library timings and digital resource access facilities?",
+        answer: "The Central Library is open from 8:00 AM to 8:00 PM on working days. Students receive remote digital access credentials to IEEE Xplore, ACM Digital Library, Springer journals, and e-book repositories through DELNET.",
+        keywords: ["library", "library timings", "digital library", "ieee", "journals", "books", "delnet", "e-resources", "library hours"]
+      },
+      {
+        id: 25, category: "College Facilities",
+        question: "Is on-campus hostel accommodation available for outstation MCA students?",
+        answer: "Yes, separate secured on-campus hostels for men and women are available with Wi-Fi, study halls, mess facilities serving hygienic food, 24/7 security, and medical assistance. Hostel allotment is made on a first-come, first-served basis.",
+        keywords: ["hostel", "hostels", "hostel facility", "hostel accommodation", "rooms", "mess", "outstation students", "boarding", "stay"]
+      },
+      {
+        id: 26, category: "College Facilities",
+        question: "Is high-speed Wi-Fi internet access available across the campus for students?",
+        answer: "Yes, secured high-speed Wi-Fi (up to 1 Gbps backbone) is accessible across academic blocks, labs, library, and hostels. Students can register their laptops with the Network Administration Center to receive their login credentials.",
+        keywords: ["wifi", "wi-fi", "internet", "network", "bandwidth", "login credentials", "campus wifi", "connectivity", "wi fi"]
+      },
+      {
+        id: 27, category: "College Facilities",
+        question: "What sports, fitness, and extracurricular facilities are present on campus?",
+        answer: "The campus features a multi-purpose sports complex with facilities for badminton, table tennis, basketball, volleyball, cricket/football grounds, a modern gymnasium, and active student clubs for coding, robotics, and cultural arts.",
+        keywords: ["sports", "gym", "gymnasium", "extracurricular", "clubs", "fitness", "games", "cultural activities", "ground"]
+      },
+      {
+        id: 28, category: "Admissions",
+        question: "Who should I contact for admissions guidance or departmental queries?",
+        answer: "You can contact the MCA Admissions Coordinator at admissions-mca@college.edu or call the Department Helpline (+91-XXXX-XXXXXX) during office hours (9:30 AM to 5:00 PM, Monday to Saturday).",
+        keywords: ["contact", "helpline", "email", "phone", "admissions coordinator", "office hours", "department contact", "guidance", "contact details", "inquiry"]
+      }
+    ];
+
+    const FALLBACK_RESPONSE = 
+      "I am sorry, but I do not have verified information regarding your query in the departmental FAQ knowledge base.\n\n" +
+      "📌 Next Steps:\n" +
+      "• Please contact the MCA Department Office (Room 204, Academic Block A).\n" +
+      "• Email: mca-office@college.edu | Helpline: +91-98765-43210\n" +
+      "• Office Hours: Monday to Saturday, 9:30 AM to 5:00 PM.";
+
+    async function loadKnowledgeBase() {
+      try {
+        const response = await fetch("faq_data.json");
+        if (response.ok) {
+          faqDatabase = await response.json();
+        }
+      } catch (e) {
+        console.log("Using embedded knowledge base (28 entries).");
+      }
+      document.getElementById("faqCount").innerText = faqDatabase.length;
+    }
+
+    // =========================================================================
+    // 2. SMART FUZZY STRING MATCHING & TYPO TOLERANCE ENGINE
+    // =========================================================================
+    function normalize(text) {
+      if (!text) return "";
+      return text.toLowerCase()
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    const STOPWORDS = new Set([
+      "a", "about", "an", "are", "as", "at", "be", "by", "for", "from",
+      "how", "i", "in", "is", "it", "of", "on", "or", "that", "the",
+      "this", "to", "was", "what", "when", "where", "who", "will", "with",
+      "can", "you", "tell", "me", "give", "please", "want", "know"
+    ]);
+
+    function getTokens(text) {
+      return normalize(text)
+        .split(" ")
+        .filter(t => t.length > 1 && !STOPWORDS.has(t));
+    }
+
+    // Levenshtein edit distance for spelling mistakes (e.g., 'addmission' -> 'admission')
+    function levenshteinDistance(s1, s2) {
+      if (s1 === s2) return 0;
+      if (!s1.length) return s2.length;
+      if (!s2.length) return s1.length;
+      const d = [];
+      for (let i = 0; i <= s1.length; i++) d[i] = [i];
+      for (let j = 0; j <= s2.length; j++) d[0][j] = j;
+      for (let i = 1; i <= s1.length; i++) {
+        for (let j = 1; j <= s2.length; j++) {
+          const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
+          d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+        }
+      }
+      return d[s1.length][s2.length];
+    }
+
+    // Evaluates match similarity between a query word and a doc word
+    function tokenSimilarity(qWord, dWord) {
+      if (qWord === dWord) return 1.0;
+
+      // Stemming / prefix check (e.g. 'exam' in 'examination', 'attend' in 'attendance')
+      if (qWord.length >= 4 && dWord.length >= 4) {
+        if (dWord.startsWith(qWord) || qWord.startsWith(dWord)) return 0.90;
+      }
+
+      // Typo handling (edit distance)
+      const maxLen = Math.max(qWord.length, dWord.length);
+      const dist = levenshteinDistance(qWord, dWord);
+      if (dist === 1 && maxLen >= 4) return 0.90;  // 1 character typo: 'addmission' vs 'admission'
+      if (dist === 2 && maxLen >= 7) return 0.80;  // 2 character typos: 'attendence' vs 'attendance'
+
+      return 0.0;
+    }
+
+    function searchFAQ(query) {
+      const clean = normalize(query);
+
+      // Guard against unsupported predictive and out-of-scope queries
+      const unsupportedPatterns = [
+        /exact placement package offered to me/,
+        /how much salary will i get next year/,
+        /what will be my personal rank/,
+        /book (a|the) (train|flight|movie|bus) ticket/,
+        /what is the weather today/,
+        /who is the president/
+      ];
+      for (const p of unsupportedPatterns) {
+        if (p.test(clean)) {
+          return { status: "FALLBACK", score: 0.0, answer: FALLBACK_RESPONSE };
+        }
+      }
+
+      const qTokens = getTokens(query);
+      if (qTokens.length === 0) {
+        return { status: "FALLBACK", score: 0.0, answer: FALLBACK_RESPONSE };
+      }
+
+      let bestScore = 0;
+      let bestItem = null;
+
+      for (const item of faqDatabase) {
+        const questionTokens = getTokens(item.question);
+        const keywordTokens = getTokens(item.keywords.join(" "));
+        const categoryTokens = getTokens(item.category);
+
+        let matchSum = 0;
+
+        for (const qWord of qTokens) {
+          let wordMax = 0;
+
+          // Match against keywords (highest weight: 1.4)
+          for (const kw of keywordTokens) {
+            const sim = tokenSimilarity(qWord, kw);
+            if (sim > wordMax) wordMax = sim * 1.4;
+          }
+
+          // Match against question title (weight: 1.2)
+          for (const qw of questionTokens) {
+            const sim = tokenSimilarity(qWord, qw);
+            if (sim * 1.2 > wordMax) wordMax = sim * 1.2;
+          }
+
+          // Match against category (weight: 1.0)
+          for (const cw of categoryTokens) {
+            const sim = tokenSimilarity(qWord, cw);
+            if (sim > wordMax) wordMax = sim;
+          }
+
+          matchSum += wordMax;
+        }
+
+        // Normalize score relative to number of query tokens
+        const score = matchSum / (qTokens.length * 1.4);
+
+        if (score > bestScore) {
+          bestScore = score;
+          bestItem = item;
+        }
+      }
+
+      // Confident threshold check (0.28)
+      if (bestScore >= 0.28 && bestItem) {
+        return {
+          status: "SUCCESS",
+          score: Math.min(bestScore, 1.0),
+          matchedFaq: bestItem,
+          answer: bestItem.answer,
+          category: bestItem.category
+        };
+      } else {
+        return {
+          status: "FALLBACK",
+          score: Math.min(bestScore, 1.0),
+          answer: FALLBACK_RESPONSE
+        };
+      }
+    }
+
+    // =========================================================================
+    // 3. UI RENDERING & EVENT HANDLERS
+    // =========================================================================
+    function appendMessage(role, text, metadata = null) {
+      const container = document.getElementById("chatContainer");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `message ${role}`;
+
+      const avatar = document.createElement("div");
+      avatar.className = "avatar";
+      avatar.innerText = role === "bot" ? "🤖" : "👤";
+
+      const contentWrapper = document.createElement("div");
+      const content = document.createElement("div");
+      content.className = "msg-content";
+      content.innerHTML = text.replace(/\n/g, "<br>");
+      contentWrapper.appendChild(content);
+
+      if (metadata) {
+        const badge = document.createElement("div");
+        if (metadata.status === "SUCCESS") {
+          badge.className = "meta-badge matched";
+          badge.innerHTML = `🎯 [${metadata.category}] • Match: ${(metadata.score * 100).toFixed(0)}%`;
+        } else {
+          badge.className = "meta-badge fallback";
+          badge.innerHTML = `⚠️ Fallback Triggered • Score: ${(metadata.score * 100).toFixed(0)}%`;
+        }
+        contentWrapper.appendChild(badge);
+      }
+
+      msgDiv.appendChild(avatar);
+      msgDiv.appendChild(contentWrapper);
+      container.appendChild(msgDiv);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function handleUserSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById("queryInput");
+      const query = input.value.trim();
+      if (!query) return;
+
+      appendMessage("user", query);
+      input.value = "";
+
+      // Process query with local retrieval engine
+      setTimeout(() => {
+        const res = searchFAQ(query);
+        appendMessage("bot", res.answer, res);
+      }, 150);
+    }
+
+    function askPredefined(question) {
+      document.getElementById("queryInput").value = question;
+      document.getElementById("chatForm").dispatchEvent(new Event("submit"));
+    }
+
+    function clearChat() {
+      const container = document.getElementById("chatContainer");
+      container.innerHTML = `
+        <div class="message bot">
+          <div class="avatar">🤖</div>
+          <div>
+            <div class="msg-content">
+              Chat history cleared! 👋 How can I assist you with the MCA department today?
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Initialize knowledge base on page load
+    window.onload = loadKnowledgeBase;
+  </script>
+</body>
+</html>

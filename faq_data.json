@@ -1,0 +1,198 @@
+[
+  {
+    "id": 1,
+    "category": "Admissions",
+    "question": "What is the eligibility criteria for admission into the MCA program?",
+    "answer": "Candidates must hold a recognized Bachelor's degree of minimum 3 years duration (such as BCA, B.Sc Computer Science/IT, or B.Sc/B.Com/B.A with Mathematics at 10+2 or graduation level) with at least 50% aggregate marks (45% for reserved categories). [Illustrative sample data: Refer to official brochure for university-specific criteria].",
+    "keywords": ["eligibility", "criteria", "admission", "admissions", "admission criteria", "qualification", "bca", "bsc", "percentage", "maths", "entrance", "degree requirements", "minimum marks"]
+  },
+  {
+    "id": 2,
+    "category": "Admissions",
+    "question": "Is lateral entry available for direct admission into the second year of MCA?",
+    "answer": "Lateral entry into the second year is governed by state government and university technical education norms. Generally, candidates holding a BCA or B.Sc (Computer Science / IT) degree may be eligible subject to seat availability and qualifying entrance examination ranks. [Illustrative sample data].",
+    "keywords": ["lateral", "entry", "lateral entry", "second year", "direct admission", "bca", "bsc cs", "eligibility", "direct 2nd year"]
+  },
+  {
+    "id": 3,
+    "category": "Admissions",
+    "question": "What is the admission procedure and how do I apply for MCA?",
+    "answer": "Admissions are conducted through the State Common Entrance Test (CET) or the National Level Entrance Examination followed by centralized counseling. Prospective students can also submit an online enquiry form on the college portal for management quota counseling. [Illustrative sample data].",
+    "keywords": ["admission", "admissions", "admission details", "admission procedure", "how to apply", "application form", "counseling", "entrance exam", "cet", "process", "apply for mca", "enrollment"]
+  },
+  {
+    "id": 4,
+    "category": "Admissions",
+    "question": "What documents are required at the time of MCA admission verification?",
+    "answer": "Required documents include: 10th and 12th marksheets, Degree marks cards (all semesters), Degree certificate / Provisional certificate, Entrance exam rank card, Transfer Certificate (TC), Migration Certificate, Caste/Category Certificate (if applicable), and Passport-size photographs. [Illustrative sample data].",
+    "keywords": ["documents required", "verification", "marksheets", "transfer certificate", "tc", "migration", "certificates", "admission documents", "papers required"]
+  },
+  {
+    "id": 5,
+    "category": "Courses",
+    "question": "What is the duration and curriculum structure of the MCA program?",
+    "answer": "The MCA is a 2-year full-time postgraduate degree program divided into 4 semesters. The curriculum covers foundational computer science, core programming, modern software engineering, data science, cloud computing, and includes a mandatory final-semester industry capstone project. [Illustrative sample data].",
+    "keywords": ["duration", "curriculum", "structure", "semesters", "2 years", "syllabus", "course outline", "postgraduate", "course details", "subjects list", "program structure"]
+  },
+  {
+    "id": 6,
+    "category": "Courses",
+    "question": "What elective subjects and specializations are offered in the MCA department?",
+    "answer": "The department offers track-based electives in Artificial Intelligence & Machine Learning, Full-Stack Web Development, Cloud Computing & DevOps, Cyber Security, and Big Data Analytics during the 3rd and 4th semesters. [Illustrative sample data].",
+    "keywords": ["electives", "specializations", "subjects", "tracks", "ai", "machine learning", "cloud", "cyber security", "full stack", "elective subjects", "course options"]
+  },
+  {
+    "id": 7,
+    "category": "Courses",
+    "question": "Is an industry internship or major project mandatory for completion of MCA?",
+    "answer": "Yes, every MCA student must complete a 16-to-20 week major industry project or departmental research internship during the final (4th) semester, followed by a project report submission and viva voce examination. [Illustrative sample data].",
+    "keywords": ["internship", "major project", "capstone", "final semester", "viva", "industry project", "mandatory", "internship details", "project work"]
+  },
+  {
+    "id": 8,
+    "category": "Courses",
+    "question": "Are value-added certification courses provided alongside regular classes?",
+    "answer": "Yes, the MCA department conducts industry-aligned bridge courses and certifications on Python programming, Generative AI tools, Docker, Kubernetes, AWS Cloud, and Soft Skills Development at subsidized student rates. [Illustrative sample data].",
+    "keywords": ["certification", "value added", "workshops", "python", "generative ai", "aws", "skill development", "extra courses"]
+  },
+  {
+    "id": 9,
+    "category": "Examinations",
+    "question": "How is the internal assessment (CIE) and external semester examination weighted?",
+    "answer": "The continuous internal evaluation (CIE) typically carries 40% weightage (internal tests, quizzes, lab performance, and assignments), while the semester-end examination (SEE) carries 60% weightage, as per university guidelines. [Illustrative sample data].",
+    "keywords": ["exam", "exams", "examination", "exam details", "examination details", "internal assessment", "cie", "see", "external examination", "weightage", "marks distribution", "split", "exam pattern", "evaluation scheme"]
+  },
+  {
+    "id": 10,
+    "category": "Examinations",
+    "question": "What are the minimum passing marks in internal and semester exams?",
+    "answer": "Students must secure at least 40% marks in the semester-end exam and a combined total of at least 50% (CIE + SEE) in each subject to pass, adhering to postgraduate academic regulations. [Illustrative sample data].",
+    "keywords": ["passing marks", "minimum marks", "pass criteria", "cut off", "score", "semester exam", "regulations", "pass percentage", "minimum score"]
+  },
+  {
+    "id": 11,
+    "category": "Examinations",
+    "question": "What is the procedure for revaluation or photocopy of examination answer scripts?",
+    "answer": "Students can apply online through the student examination portal within 10 days of result announcement by paying the prescribed university revaluation fee. Answer script photocopies can also be requested for verification. [Illustrative sample data].",
+    "keywords": ["revaluation", "photocopy", "rechecking", "answer scripts", "results", "exam review", "reval fee", "revaluation process", "paper verification"]
+  },
+  {
+    "id": 12,
+    "category": "Examinations",
+    "question": "When are supplementary or backlog examinations conducted?",
+    "answer": "Supplementary examinations for clearing backlogs are generally conducted during the semester break or concurrently with odd/even semester regular examinations, in accordance with the university examination schedule. [Illustrative sample data].",
+    "keywords": ["supplementary", "backlogs", "arrears", "makeup exam", "repeat exam", "exam schedule", "clearing backlog", "kt exam"]
+  },
+  {
+    "id": 13,
+    "category": "Attendance",
+    "question": "What is the minimum attendance percentage required to be eligible for semester exams?",
+    "answer": "A minimum of 75% attendance in both theory and practical lab classes is mandatory to appear for the semester-end examinations. [Illustrative sample data: College attendance regulation].",
+    "keywords": ["attendance", "minimum attendance", "attendance percentage", "attendance rules", "attendance requirement", "75 percentage", "exam eligibility", "criteria", "attendance details"]
+  },
+  {
+    "id": 14,
+    "category": "Attendance",
+    "question": "Can shortage of attendance be condoned on medical grounds?",
+    "answer": "Students with attendance between 65% and 74% may apply for medical condonation by submitting authentic hospital discharge summaries/medical certificates to the Head of Department within 3 days of resuming classes, subject to principal approval. [Illustrative sample data].",
+    "keywords": ["medical leave", "condonation", "shortage", "medical certificate", "sick leave", "attendance relaxation", "medical grounds"]
+  },
+  {
+    "id": 15,
+    "category": "Attendance",
+    "question": "How can students and parents track daily and monthly attendance?",
+    "answer": "Attendance is recorded online by faculty every lecture hour and can be viewed in real-time by logging into the College ERP Student Portal or the official College Mobile App. [Illustrative sample data].",
+    "keywords": ["track attendance", "erp portal", "student portal", "mobile app", "daily attendance", "view attendance", "check attendance"]
+  },
+  {
+    "id": 16,
+    "category": "Fees",
+    "question": "What is the fee payment schedule and accepted payment modes?",
+    "answer": "Tuition fees are payable annually or semester-wise before the commencement of each academic session. Payments are accepted through the online ERP fee gateway via Net Banking, UPI, Credit/Debit cards, or Demand Draft (DD). [Illustrative sample data].",
+    "keywords": ["fee", "fees", "fee details", "fee structure", "tuition fee", "fee payment", "schedule", "payment modes", "net banking", "upi", "installment", "erp", "college fees"]
+  },
+  {
+    "id": 17,
+    "category": "Fees",
+    "question": "Are there government scholarships or merit fee concessions available?",
+    "answer": "Eligible students can avail state government post-matric scholarships (OBC/SC/ST/EWS), NSP central scholarships, and college institutional merit waivers for top entrance exam rank holders. Details are available at the college scholarship desk. [Illustrative sample data].",
+    "keywords": ["scholarship", "merit concession", "financial aid", "fee concession", "government scholarship", "nsp", "waiver", "scholarships", "fee discount"]
+  },
+  {
+    "id": 18,
+    "category": "Fees",
+    "question": "What is the policy regarding late fee penalties and refund requests?",
+    "answer": "A nominal per-day late fine applies after the scheduled due date. Fee refund requests following admission withdrawal are processed strictly per UGC/AICTE refund policy guidelines based on the withdrawal notice date. [Illustrative sample data].",
+    "keywords": ["late fee", "penalty", "refund policy", "fee refund", "cancellation", "withdrawal", "ugc norms", "fine"]
+  },
+  {
+    "id": 19,
+    "category": "Placements",
+    "question": "How does the departmental training and placement cell assist MCA students?",
+    "answer": "The Central Placement Cell coordinates on-campus recruitment, conducts pre-placement training (aptitude, coding practice, mock technical interviews, and resume building workshops), and connects students with leading IT organizations. [Illustrative sample data].",
+    "keywords": ["placement", "placements", "placement details", "placement cell", "training", "aptitude", "mock interviews", "campus recruitment", "job assistance", "placement support", "campus hiring"]
+  },
+  {
+    "id": 20,
+    "category": "Placements",
+    "question": "What are the eligibility criteria for participating in campus placement drives?",
+    "answer": "Students typically need a minimum aggregate CGPA of 6.0 or 60% across undergraduate and MCA semesters, with no active backlogs at the time of the recruitment drive, although individual company criteria may vary. [Illustrative sample data].",
+    "keywords": ["placement eligibility", "cgpa criteria", "company eligibility", "active backlogs", "campus drive", "placement criteria", "eligibility for placement"]
+  },
+  {
+    "id": 21,
+    "category": "Placements",
+    "question": "Which IT companies and industries frequently recruit MCA graduates?",
+    "answer": "Recruiters include multinational IT service firms, software product startups, fintech companies, and cloud solution providers (e.g., software engineering, web development, QA automation, and data analytics roles). [Illustrative sample data: Refer to annual placement report for exact company list].",
+    "keywords": ["recruiters", "companies", "top recruiters", "hiring", "it companies", "placement records", "job roles", "visiting companies"]
+  },
+  {
+    "id": 22,
+    "category": "Placements",
+    "question": "What was the highest or average salary package offered in recent placements?",
+    "answer": "Placement packages depend on market demand, technical skills, and candidate performance. Official audited compensation statistics (average and highest CTC) are published in the Department Annual Placement Brochure. [Illustrative sample data: Specific individual packages cannot be predicted].",
+    "keywords": ["salary package", "average package", "highest package", "ctc", "placement stats", "compensation", "salary", "lpa"]
+  },
+  {
+    "id": 23,
+    "category": "College Facilities",
+    "question": "What computing and laboratory facilities are available for MCA students?",
+    "answer": "The department maintains dedicated air-conditioned labs equipped with high-performance desktop systems, GPU workstations for AI/ML projects, gigabit LAN connectivity, and licensed software suites alongside open-source development tools. [Illustrative sample data].",
+    "keywords": ["computer lab", "facilities", "gpu workstations", "hardware", "software", "infrastructure", "laboratory", "labs", "computers"]
+  },
+  {
+    "id": 24,
+    "category": "College Facilities",
+    "question": "What are the college library timings and digital resource access facilities?",
+    "answer": "The Central Library is open from 8:00 AM to 8:00 PM on working days. Students receive remote digital access credentials to IEEE Xplore, ACM Digital Library, Springer journals, and e-book repositories through DELNET. [Illustrative sample data].",
+    "keywords": ["library", "library timings", "digital library", "ieee", "journals", "books", "delnet", "e-resources", "library hours"]
+  },
+  {
+    "id": 25,
+    "category": "College Facilities",
+    "question": "Is on-campus hostel accommodation available for outstation MCA students?",
+    "answer": "Yes, separate secured on-campus hostels for men and women are available with Wi-Fi, study halls, mess facilities serving hygienic food, 24/7 security, and medical assistance. Hostel allotment is made on a first-come, first-served basis. [Illustrative sample data].",
+    "keywords": ["hostel", "hostels", "hostel facility", "hostel accommodation", "rooms", "mess", "outstation students", "boarding", "stay"]
+  },
+  {
+    "id": 26,
+    "category": "College Facilities",
+    "question": "Is high-speed Wi-Fi internet access available across the campus for students?",
+    "answer": "Yes, secured high-speed Wi-Fi (up to 1 Gbps backbone) is accessible across academic blocks, labs, library, and hostels. Students can register their laptops with the Network Administration Center to receive their login credentials. [Illustrative sample data].",
+    "keywords": ["wifi", "wi-fi", "internet", "network", "bandwidth", "login credentials", "campus wifi", "connectivity", "wi fi"]
+  },
+  {
+    "id": 27,
+    "category": "College Facilities",
+    "question": "What sports, fitness, and extracurricular facilities are present on campus?",
+    "answer": "The campus features a multi-purpose sports complex with facilities for badminton, table tennis, basketball, volleyball, cricket/football grounds, a modern gymnasium, and active student clubs for coding, robotics, and cultural arts. [Illustrative sample data].",
+    "keywords": ["sports", "gym", "gymnasium", "extracurricular", "clubs", "fitness", "games", "cultural activities", "ground"]
+  },
+  {
+    "id": 28,
+    "category": "Admissions",
+    "question": "Who should I contact for admissions guidance or departmental queries?",
+    "answer": "You can contact the MCA Admissions Coordinator at admissions-mca@college.edu or call the Department Helpline (+91-XXXX-XXXXXX) during office hours (9:30 AM to 5:00 PM, Monday to Saturday). [Illustrative sample data].",
+    "keywords": ["contact", "helpline", "email", "phone", "admissions coordinator", "office hours", "department contact", "guidance", "contact details", "inquiry"]
+  }
+]
